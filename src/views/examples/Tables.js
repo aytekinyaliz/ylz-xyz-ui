@@ -109,7 +109,7 @@ class Tables extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {projects.map(item => (
+                                        {!projects ? null : projects.map(item => (
                                             <tr key={item.id}>
                                                 <th scope='row'>
                                                     <span className='mb-0 text-sm'>

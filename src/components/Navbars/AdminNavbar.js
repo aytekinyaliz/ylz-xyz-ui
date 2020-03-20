@@ -42,11 +42,38 @@ const email = localStorage.getItem('email')
     email:email
   })
 }
-handleLogout = (e) => {
-  e.preventDefault()
-  localStorage.setItem('token', '')
-  this.props.history.push('/auth/login')
-}
+handleLogout = e => {
+  e.preventDefault();
+  const token = localStorage.getItem("token");
+
+  const url = process.env.REACT_APP_IAM_SERVICE_URI + "/api/users/signOut";
+  try {
+    console.log("object");
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        console.log(res.status);
+        localStorage.clear();
+        this.props.history.push("/auth/login");
+      } else {
+        const error = new Error(res.error);
+        throw error;
+      }
+    });
+  } catch (err) {
+    if (err.response.status === 500) {
+      console.log("There was a problem with server");
+    } else {
+      console.log(err.response.data.message);
+    }
+  }
+}; 
   render() {
     return (
       <>

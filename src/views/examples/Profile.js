@@ -16,6 +16,7 @@
 
 */
 import React from 'react';
+import Header from "components/Headers/Header.js";
 import axios from 'axios';
 // reactstrap components
 import {
@@ -277,198 +278,201 @@ class Profile extends React.Component {
         let { project, members, devices } = this.state;
         console.log(this.selectedDevice);
         return !project ? null : (
-            <Container className='mt-5' fluid>
-                <Row>
-                    <Col className='order-xl-1' xl='12'>
-                        <Card className='bg-secondary shadow'>
-                            <CardHeader className='bg-white border-0'>
-                                <Row className='align-items-center'>
-                                    <Col xs='8'>
-                                        <h2 className='mb-0'>
-                                            Name: {project.name}
-                                        </h2>
-                                    </Col>
-                                </Row>
-                            </CardHeader>
-                            <CardBody>
-                                <Form>
-                                    <FormGroup row>
-                                        <Label
-                                            for='exampleEmail'
-                                            className='col-sm-2 col-form-label col-form-label-me'
-                                        >
-                                            Project Owner
-                                        </Label>
-                                        <Label className='col-sm-8 col-form-label col-form-label-me'>
-                                            {project.owner
-                                                ? project.owner.firstName +
-                                                  ' ' +
-                                                  project.owner.lastName
-                                                : ''}
-                                        </Label>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label
-                                            for='exampleText'
-                                            className='col-sm-2 col-form-label col-form-label-me'
-                                        >
-                                            Members
-                                        </Label>
-                                        <Label className='col-sm-8 col-form-label col-form-label-me'>
-                                            {project.members
-                                                ? project.members.map(
-                                                      item =>
-                                                          item.firstName +
-                                                          ' ' +
-                                                          item.lastName +
-                                                          ','
-                                                  )
-                                                : ''}
-                                        </Label>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label
-                                            for='exampleSelect'
-                                            sm={2}
-                                        ></Label>
-                                        <Col sm={7}>
-                                            <Input
-                                                size='sm'
-                                                type='select'
-                                                name='selectedMember'
-                                                id='select'
-                                                onChange={this.handleOnChange}
+            <>
+                <Header />
+                <Container className='mt-5' fluid>
+                    <Row>
+                        <Col className='order-xl-1' xl='12'>
+                            <Card className='bg-secondary shadow'>
+                                <CardHeader className='bg-white border-0'>
+                                    <Row className='align-items-center'>
+                                        <Col xs='8'>
+                                            <h2 className='mb-0'>
+                                                Name: {project.name}
+                                            </h2>
+                                        </Col>
+                                    </Row>
+                                </CardHeader>
+                                <CardBody>
+                                    <Form>
+                                        <FormGroup row>
+                                            <Label
+                                                for='exampleEmail'
+                                                className='col-sm-2 col-form-label col-form-label-me'
                                             >
-                                                {members.map(m => (
-                                                    <option
-                                                        id='member'
-                                                        value={m.email}
-                                                        key={m.id}
-                                                    >
-                                                        {m.firstName +
+                                                Project Owner
+                                            </Label>
+                                            <Label className='col-sm-8 col-form-label col-form-label-me'>
+                                                {project.owner
+                                                    ? project.owner.firstName +
+                                                    ' ' +
+                                                    project.owner.lastName
+                                                    : ''}
+                                            </Label>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label
+                                                for='exampleText'
+                                                className='col-sm-2 col-form-label col-form-label-me'
+                                            >
+                                                Members
+                                            </Label>
+                                            <Label className='col-sm-8 col-form-label col-form-label-me'>
+                                                {project.members
+                                                    ? project.members.map(
+                                                        item =>
+                                                            item.firstName +
                                                             ' ' +
-                                                            m.lastName}
-                                                    </option>
-                                                ))}
-                                            </Input>
-                                        </Col>
-                                        <FormGroup check row>
-                                            <Col sm={{ size: 3, offset: 7 }}>
-                                                <Button
-                                                    color='primary'
-                                                    size='sm'
-                                                    onClick={
-                                                        this.handleAssignMember
-                                                    }
-                                                >
-                                                    Add Member
-                                                </Button>
-                                            </Col>
+                                                            item.lastName +
+                                                            ','
+                                                    )
+                                                    : ''}
+                                            </Label>
                                         </FormGroup>
-                                    </FormGroup>
-
-                                    <FormGroup row>
-                                        <Label
-                                            for='exampleText'
-                                            className='col-sm-2 col-form-label col-form-label-me'
-                                        >
-                                            Devices
-                                        </Label>
-                                        <Label className='col-sm-8 col-form-label col-form-label-me'>
-                                            {project.devices
-                                                ? project.devices.map(
-                                                      item => item.name + ', '
-                                                  )
-                                                : ''}
-                                        </Label>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label
-                                            for='exampleSelect'
-                                            sm={2}
-                                        ></Label>
-                                        <Col sm={7}>
-                                            <Input
-                                                size='sm'
-                                                type='select'
-                                                name='selectedDevice'
-                                                id='exampleSelect'
-                                                onChange={this.handleOnChange}
-                                            >
-                                                {devices.map(d => (
-                                                    <option
-                                                        value={d.id}
-                                                        key={d.id}
+                                        <FormGroup row>
+                                            <Label
+                                                for='exampleSelect'
+                                                sm={2}
+                                            ></Label>
+                                            <Col sm={7}>
+                                                <Input
+                                                    size='sm'
+                                                    type='select'
+                                                    name='selectedMember'
+                                                    id='select'
+                                                    onChange={this.handleOnChange}
+                                                >
+                                                    {members.map(m => (
+                                                        <option
+                                                            id='member'
+                                                            value={m.email}
+                                                            key={m.id}
+                                                        >
+                                                            {m.firstName +
+                                                                ' ' +
+                                                                m.lastName}
+                                                        </option>
+                                                    ))}
+                                                </Input>
+                                            </Col>
+                                            <FormGroup check row>
+                                                <Col sm={{ size: 3, offset: 7 }}>
+                                                    <Button
+                                                        color='primary'
+                                                        size='sm'
+                                                        onClick={
+                                                            this.handleAssignMember
+                                                        }
                                                     >
-                                                        {d.name}
-                                                    </option>
-                                                ))}
-                                            </Input>
-                                        </Col>
-                                        <FormGroup check row>
-                                            <Col sm={{ size: 3, offset: 7 }}>
-                                                <Button
-                                                    size='sm'
-                                                    color='primary'
-                                                    onClick={
-                                                        this.handleAssignDevice
-                                                    }
-                                                >
-                                                    Add Device
-                                                </Button>
-                                            </Col>
+                                                        Add Member
+                                                    </Button>
+                                                </Col>
+                                            </FormGroup>
                                         </FormGroup>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label
-                                            for='exampleText'
-                                            className='col-sm-2 col-form-label col-form-label-me'
-                                        >
-                                            Files
-                                        </Label>
-                                        <Label className='col-sm-8 col-form-label col-form-label-me'>
-                                            {project.files
-                                                ? project.files.map(
-                                                      item => item + ', '
-                                                  )
-                                                : ''}
-                                        </Label>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label for='exampleFile' sm={2}></Label>
-                                        <Col sm={7}>
-                                            <Input
-                                                type='file'
-                                                name='file'
-                                                onChange={this.fileInputChange}
-                                            />
-                                            <FormText color='muted'>
-                                                This is some placeholder
-                                                block-level help text for the
-                                                above input. It's a bit lighter
-                                                and easily wraps to a new line.
-                                            </FormText>
-                                        </Col>
-                                        <FormGroup check row>
-                                            <Col sm={{ size: 3, offset: 7 }}>
-                                                <Button
-                                                    onClick={
-                                                        this.handleFileUpload
-                                                    }
-                                                    size='sm'
-                                                    color='primary'
-                                                >
-                                                    Upload File
-                                                </Button>
-                                            </Col>
+
+                                        <FormGroup row>
+                                            <Label
+                                                for='exampleText'
+                                                className='col-sm-2 col-form-label col-form-label-me'
+                                            >
+                                                Devices
+                                            </Label>
+                                            <Label className='col-sm-8 col-form-label col-form-label-me'>
+                                                {project.devices
+                                                    ? project.devices.map(
+                                                        item => item.name + ', '
+                                                    )
+                                                    : ''}
+                                            </Label>
                                         </FormGroup>
-                                    </FormGroup>
-                                </Form>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+                                        <FormGroup row>
+                                            <Label
+                                                for='exampleSelect'
+                                                sm={2}
+                                            ></Label>
+                                            <Col sm={7}>
+                                                <Input
+                                                    size='sm'
+                                                    type='select'
+                                                    name='selectedDevice'
+                                                    id='exampleSelect'
+                                                    onChange={this.handleOnChange}
+                                                >
+                                                    {devices.map(d => (
+                                                        <option
+                                                            value={d.id}
+                                                            key={d.id}
+                                                        >
+                                                            {d.name}
+                                                        </option>
+                                                    ))}
+                                                </Input>
+                                            </Col>
+                                            <FormGroup check row>
+                                                <Col sm={{ size: 3, offset: 7 }}>
+                                                    <Button
+                                                        size='sm'
+                                                        color='primary'
+                                                        onClick={
+                                                            this.handleAssignDevice
+                                                        }
+                                                    >
+                                                        Add Device
+                                                    </Button>
+                                                </Col>
+                                            </FormGroup>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label
+                                                for='exampleText'
+                                                className='col-sm-2 col-form-label col-form-label-me'
+                                            >
+                                                Files
+                                            </Label>
+                                            <Label className='col-sm-8 col-form-label col-form-label-me'>
+                                                {project.files
+                                                    ? project.files.map(
+                                                        item => item + ', '
+                                                    )
+                                                    : ''}
+                                            </Label>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label for='exampleFile' sm={2}></Label>
+                                            <Col sm={7}>
+                                                <Input
+                                                    type='file'
+                                                    name='file'
+                                                    onChange={this.fileInputChange}
+                                                />
+                                                <FormText color='muted'>
+                                                    This is some placeholder
+                                                    block-level help text for the
+                                                    above input. It's a bit lighter
+                                                    and easily wraps to a new line.
+                                                </FormText>
+                                            </Col>
+                                            <FormGroup check row>
+                                                <Col sm={{ size: 3, offset: 7 }}>
+                                                    <Button
+                                                        onClick={
+                                                            this.handleFileUpload
+                                                        }
+                                                        size='sm'
+                                                        color='primary'
+                                                    >
+                                                        Upload File
+                                                    </Button>
+                                                </Col>
+                                            </FormGroup>
+                                        </FormGroup>
+                                    </Form>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </>
         );
     }
 }

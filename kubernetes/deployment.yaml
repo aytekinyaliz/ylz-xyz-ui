@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: "ylz-xyz-ui-1"
-        image: "gcr.io/ylz-xyz-infra/github.com/aytekinyaliz/ylz-xyz-ui:7db29f425b09cb3f267efbcbbd2d52069c55d76a"
+        image: "gcr.io/ylz-xyz-infra/github.com/aytekinyaliz/ylz-xyz-ui:b925267"
         env:
         - name: "NODE_ENV"
           valueFrom:

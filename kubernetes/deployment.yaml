@@ -1,0 +1,51 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "ylz-xyz-ui"
+  namespace: "default"
+  labels:
+    app: "ylz-xyz-ui"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "ylz-xyz-ui"
+  template:
+    metadata:
+      labels:
+        app: "ylz-xyz-ui"
+    spec:
+      containers:
+      - name: "ylz-xyz-ui-1"
+        image: "gcr.io/ylz-xyz-infra/github.com/aytekinyaliz/ylz-xyz-ui:5f91b9f"
+        env:
+        - name: "NODE_ENV"
+          valueFrom:
+            configMapKeyRef:
+              key: "NODE_ENV"
+              name: "ylz-xyz-ui-config-er43i"
+        - name: "REACT_APP_PORT"
+          valueFrom:
+            configMapKeyRef:
+              key: "REACT_APP_PORT"
+              name: "ylz-xyz-ui-config-er43i"
+        - name: "REACT_APP_IAM_SERVICE_URI"
+          valueFrom:
+            configMapKeyRef:
+              key: "REACT_APP_IAM_SERVICE_URI"
+              name: "ylz-xyz-ui-config-er43i"
+        - name: "REACT_APP_PROJECT_SERVICE_URI"
+          valueFrom:
+            configMapKeyRef:
+              key: "REACT_APP_PROJECT_SERVICE_URI"
+              name: "ylz-xyz-ui-config-er43i"
+        - name: "REACT_APP_DEVICE_SERVICE_URI"
+          valueFrom:
+            configMapKeyRef:
+              key: "REACT_APP_DEVICE_SERVICE_URI"
+              name: "ylz-xyz-ui-config-er43i"
+        - name: "REACT_APP_FILE_SERVICE_URI"
+          valueFrom:
+            configMapKeyRef:
+              key: "REACT_APP_FILE_SERVICE_URI"
+              name: "ylz-xyz-ui-config-er43i"

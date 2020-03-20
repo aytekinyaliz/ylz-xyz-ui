@@ -1,0 +1,14 @@
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "ylz-xyz-ui-config-er43i"
+  namespace: "default"
+  labels:
+    app: "ylz-xyz-ui"
+data:
+  NODE_ENV: "prod"
+  REACT_APP_PORT: "3000"
+  REACT_APP_IAM_SERVICE_URI: "http://35.198.79.51:80"
+  REACT_APP_PROJECT_SERVICE_URI: "http://35.198.179.165:80"
+  REACT_APP_DEVICE_SERVICE_URI: "http://35.198.155.104:80"
+  REACT_APP_FILE_SERVICE_URI: "http://34.89.237.92:80"
